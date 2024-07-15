@@ -1,0 +1,81 @@
+{% extends "_base.html" %} {% block body %}
+<br />
+<div class="result">
+  <div class="loading"></div>
+  <span>ワードクラウドを作成中....</span><span>（最大10秒程度かかります）</span>
+</div>
+<br />
+<img class="generated" width="100%" />
+
+<br />
+<br />
+
+<div class="border border-light p-3 mb-4 hide-first" style="display: none">
+  <div class="text-center">
+    <form method="post" name="tweetform" action="/shareTwitter">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+    </form>
+    <button type="button" class="btn btn-primary">
+      <a href="javascript:tweetform.submit()"
+        ><h3 style="color: #0c87cf">ツイートする！</h3></a
+      >
+    </button>
+    <br />
+    <p class="inlinetext">画像付きリンクでツイートできます。<br>または <a style="color:#15883e; cursor:pointer;" onclick="imageLinkCopy()">画像付きリンクを取得する</a></p>
+  </div>
+</div>
+
+<div class="border border-light p-3 mb-4 hide-first" style="display: none">
+  <div class="text-center">
+    <form method="post" name="saveform" action="/save">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+    </form>
+    <button type="button" class="btn btn-primary saveimagetext">
+      <a href="javascript:saveform.submit()" onclick="afterSubmission()"><h3>画像を保存する</h3></a>
+    </button>
+    <br />
+    <p class="inlinetext">作成した画像をいつでも見返せるようになります。</p>
+  </div>
+</div>
+
+<div class="border border-light p-3 mb-4 hide-first" style="display: none">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary">
+      <a href="/history"><h3>過去に作成した画像</h3></a>
+    </button>
+  </div>
+</div>
+<br />
+
+<div class="border border-light p-3 mb-4 hide-first" style="display: none">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary">
+      <a onclick="logout()"><h5>ログアウト</h5></a>
+    </button>
+  </div>
+</div>
+
+<style type="text/css">
+  .loading {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #000000;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.4s infinite linear;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<script src="/static/js/authorized.js"></script>
+{% endblock %}
