@@ -1,0 +1,65 @@
+{% extends "_base.html" %} 
+
+{% block additionaljs %}
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+{% endblock %}
+
+{% block body %}
+<br />
+<h3>過去に作成した画像一覧</h3>
+<br />
+<div class="row">
+  {% if pictures|length > 0 %} {% for item in pictures %} {% set imgsrc =
+  "https://storage.googleapis.com/" + cloud_storage_bucket + "/wordclouds/" + item.file_name.strip() %} {% set deletesrc = "/history/" +
+  item.file_name.replace('.png', '').strip() %}
+
+  <div class="col-md-6">
+    <div class="card mb-4 shadow-sm">
+      <img class="lazyload" data-src="{{imgsrc}}" width="100%" />
+      <div class="card-body">
+        <p class="card-text">
+          {% set timestamp_jst = utc_to_jst(item.created_at) %}
+          {{ timestamp_jst.strftime('%Y年%m月%d日 %H:%M:%S') }} 作成
+        </p>
+        <form
+          action="{{deletesrc}}"
+          method="POST"
+          onSubmit="return checkSubmit()"
+        >
+          <input type="hidden" name="_method" value="DELETE" />
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+          <button
+            type="submit"
+            class="btn btn-default"
+            style="text-align: right; color: red; margin: 0; padding: 0"
+          >
+            削除
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="col-md-6">
+    <p>まだ画像が保存されていません。</p>
+  </div>
+  {% endif %}
+</div>
+<div class="border border-light p-3 mb-4">
+  <div class="text-center">
+    <button type="button" class="btn btn-primary">
+      <a href="/"><h3>戻る</h3></a>
+    </button>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<script type="text/javascript">
+  lazyload();
+  
+  function checkSubmit() {
+    return confirm("削除してもよろしいですか？");
+  }
+</script>
+{% endblock %}

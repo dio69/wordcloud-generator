@@ -1,0 +1,99 @@
+{% extends "_base.html" %} 
+
+{% block titlte %} <title>Spotify WordCloud | お気に入りのアーティストを、画像で記録する。</title> {% endblock %}
+
+{% block topimage %}
+<div class="card">
+  <img class="card-img" src="https://res.cloudinary.com/hellorusk/image/upload/f_auto,q_auto/v1612249207/dj" alt="">
+  <div class="card-img-overlay">
+    <p class="text-white"><span>お気に入りのアーティストを、</span><span>画像で記録する。</span></p>
+    <span class="movingarrow"></span>
+  </div>
+</div>
+<style>
+  .movingarrow {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-animation: sdb 1.5s infinite;
+    animation: sdb 1.5s infinite;
+    box-sizing: border-box;
+  }
+  @-webkit-keyframes sdb {
+    0% {
+      -webkit-transform: rotate(-45deg) translate(0, 0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+      opacity: 0;
+    }
+  }
+  @keyframes sdb {
+    0% {
+      transform: rotate(-45deg) translate(0, 0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(-45deg) translate(-20px, 20px);
+      opacity: 0;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<h4>よく聴いているアーティストの名前からワードクラウドを作ることができます。</h4>
+<br />
+<img
+  src="https://res.cloudinary.com/hellorusk/image/upload/f_auto,q_auto,w_900/v1611156028/top"
+  class="img-fluid mx-auto d-block"
+  style="margin: 1.5em;"
+/>
+<br />
+<br />
+<h4>ワードクラウドをその場でツイートすることもできます。</h4>
+<br />
+<img
+  src="https://res.cloudinary.com/hellorusk/image/upload/f_auto,q_auto,w_700/v1611236017/tweet"
+  class="img-fluid mx-auto d-block"
+/>
+<br />
+<br />
+<h4>ワードクラウドを保存して、あとから見返すこともできます。</h4>
+<br />
+<img
+  src="https://res.cloudinary.com/hellorusk/image/upload/f_auto,q_auto,w_1000/v1611287976/history_browse"
+  class="img-fluid mx-auto d-block"
+/>
+<br />
+<div class="border border-light p-3 mb-4">
+  <div class="text-center">
+    <h4><span>あなたのワードクラウドを</span><span>作りましょう。</span></h4>
+    <br />
+    <button type="button" class="btn btn-info btn-lg">
+      <a href="/login"><h5 class="small">Spotify でログイン</h5></a>
+    </button>
+    <br />
+    <button type="button" class="btn btn-info2 btn-lg">
+      <a href="https://8xx.notion.site/8xx/Spotify-WordCloud-731b47bc655341fda54addf855ab4133"><h5 class="small">みんなのクラウドを見る</h5></a>
+    </button>
+  </div>
+</div>
+<br />
+<br />
+<br />
+{% endblock %}
